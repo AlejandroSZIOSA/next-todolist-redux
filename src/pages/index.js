@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import TodoItem from "./components/TodoItem";
+import TodoItem from "@/components/TodoItem";
 
 //External variables
 var nextIndex = 0;
