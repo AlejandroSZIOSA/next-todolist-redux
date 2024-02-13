@@ -1,23 +1,42 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import TodoItem from "@/components/TodoItem";
+
+import { addTask } from "@/utils/redux/todolist";
+import { useDispatch, useSelector } from "react-redux";
 
 //External variables
 var nextIndex = 0;
-var title;
+
+const objTest = {
+  id: 1,
+  title: "test",
+  done: false,
+};
 
 function App() {
   const [todoList, setTodoList] = useState([]);
   const inputRef = useRef();
 
-  //Capture the text input
-  function handlerTextInput(event) {
-    title = event.target.value;
+  const dispatch = useDispatch();
+  const todoList2 = useSelector((state) => state.todoList);
+
+  const [taskTitle, setTaskTitle] = useState("");
+
+  function handleTest() {
+    console.log(todoList2);
+  }
+
+  function addTaskTest() {
+    dispatch(addTask({ id: nextIndex++, title: taskTitle, done: true }));
   }
 
   //Add Item to the todo list
   function addTodoItem() {
     inputRef.current.value = ""; //useRef Hook :)
-    setTodoList([...todoList, { id: nextIndex++, title: title, done: false }]);
+    setTodoList([
+      ...todoList,
+      { id: nextIndex++, title: taskTitle, done: false },
+    ]);
   }
 
   //Callback function event with params
@@ -46,6 +65,10 @@ function App() {
     <>
       <div>
         <h1> TODO - APP</h1>
+        <h2>Test</h2>
+        <button onClick={addTaskTest}>Add Task</button>
+        <button onClick={handleTest}>Test</button>
+
         <div>
           <h2>
             <strong>Title:</strong>
@@ -53,30 +76,23 @@ function App() {
           <div>
             <input
               type="text"
-              onChange={handlerTextInput}
+              onChange={(e) => setTaskTitle(e.target.value)}
               size="15"
               maxLength="17"
               ref={inputRef}
             ></input>
           </div>
-          <button onClick={addTodoItem}>Add</button>
+          <button onClick={addTaskTest}>Add</button>
         </div>
 
         <div>
-          <ul>
-            {todoList.map((item) => (
+          <ol>
+            {todoList2.map((item) => (
               <li key={item.id}>
-                <TodoItem
-                  itemObj={item} /* Passing object as prop :)*/
-                  onClickDoneUndoneFn={
-                    handleDoneUndoneData
-                  } /* Callback event Functions with params */
-                  onClickRemoveItemFn={handleRemoveTodoItem}
-                />
-                <br />
+                <p>{item.title}</p>
               </li>
             ))}
-          </ul>
+          </ol>
         </div>
       </div>
     </>
