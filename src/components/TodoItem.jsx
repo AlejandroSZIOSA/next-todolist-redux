@@ -4,9 +4,9 @@ let btnDoneColor;
 
 export default function TodoItem(props) {
   //Destructuring Item object :)
-  const title = props.itemObj.title;
-  const id = props.itemObj.id;
-  const done = props.itemObj.done;
+  const title = props.task.title;
+  const id = props.task.id;
+  const done = props.task.done;
 
   //Change bgColor "button Done UnDone"
   if (done) {

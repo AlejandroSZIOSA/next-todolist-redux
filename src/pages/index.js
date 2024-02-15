@@ -7,12 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 //External variables
 var nextIndex = 0;
 
-const objTest = {
-  id: 1,
-  title: "test",
-  done: false,
-};
-
 function App() {
   const [todoList, setTodoList] = useState([]);
   const inputRef = useRef();
@@ -27,12 +21,12 @@ function App() {
   }
 
   function addTaskTest() {
+    inputRef.current.value = ""; //useRef Hook :)
     dispatch(addTask({ id: nextIndex++, title: taskTitle, done: true }));
   }
 
   //Add Item to the todo list
   function addTodoItem() {
-    inputRef.current.value = ""; //useRef Hook :)
     setTodoList([
       ...todoList,
       { id: nextIndex++, title: taskTitle, done: false },
@@ -89,7 +83,7 @@ function App() {
           <ol>
             {todoList2.map((item) => (
               <li key={item.id}>
-                <p>{item.title}</p>
+                <TodoItem task={item} />
               </li>
             ))}
           </ol>
