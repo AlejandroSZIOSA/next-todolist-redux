@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import TodoItem from "@/components/TodoItem";
 
-import { addTask } from "@/utils/redux/todolist";
+import { addTask, removeTask } from "@/utils/redux/todolist";
 import { useDispatch, useSelector } from "react-redux";
 
 //External variables
@@ -22,7 +22,7 @@ function App() {
 
   function addTaskTest() {
     inputRef.current.value = ""; //useRef Hook :)
-    dispatch(addTask({ id: nextIndex++, title: taskTitle, done: true }));
+    dispatch(addTask({ id: nextIndex++, title: taskTitle, done: false }));
   }
 
   //Add Item to the todo list
@@ -40,8 +40,11 @@ function App() {
     const modifyItem = toDoItems.find((i) => i.id === id); //Find the "item" that will be modify
     //Conditional: Set new values
     if (done) {
+      /* dispatch(setTaskStatus({ done: false })); */
+
       modifyItem.done = false;
     } else {
+      /* dispatch(setTaskStatus({ done: true })); */
       modifyItem.done = true;
     }
     //Update the "todo list" state

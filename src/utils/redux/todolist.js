@@ -16,6 +16,6 @@ export const todoListSlice = createSlice({
   },
 });
 
-export const { addTask } = todoListSlice.actions;
+export const { addTask, setTaskStatus, removeTask } = todoListSlice.actions; //destructuring reducers
 
 export default todoListSlice.reducer;
