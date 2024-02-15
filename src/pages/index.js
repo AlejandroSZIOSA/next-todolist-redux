@@ -1,8 +1,9 @@
 import { useRef, useState, useEffect } from "react";
 import TodoItem from "@/components/TodoItem";
 
-import { addTask, removeTask } from "@/utils/redux/todolist";
+import { addTask, removeTask, setTaskStatus } from "@/utils/redux/todolist";
 import { useDispatch, useSelector } from "react-redux";
+import { stringify } from "postcss";
 
 //External variables
 var nextIndex = 0;
@@ -23,14 +24,6 @@ function App() {
   function addTaskTest() {
     inputRef.current.value = ""; //useRef Hook :)
     dispatch(addTask({ id: nextIndex++, title: taskTitle, done: false }));
-  }
-
-  //Add Item to the todo list
-  function addTodoItem() {
-    setTodoList([
-      ...todoList,
-      { id: nextIndex++, title: taskTitle, done: false },
-    ]);
   }
 
   //Callback function event with params
@@ -55,7 +48,9 @@ function App() {
   function handleRemoveTodoItem(id) {
     /* This modify the current todo list by excluding the given 
     "id", then set the new "array object" state (update) */
-    setTodoList(todoList.filter((a) => a.id !== id));
+    /* setTodoList(todoList.filter((a) => a.id !== id)); */
+
+    dispatch(removeTask(id));
   }
 
   return (
@@ -86,7 +81,11 @@ function App() {
           <ol>
             {todoList2.map((item) => (
               <li key={item.id}>
-                <TodoItem task={item} />
+                <TodoItem
+                  task={item}
+                  onClickRemoveItemFn={handleRemoveTodoItem}
+                  onClickDoneUndoneFn={handleDoneUndoneData}
+                />
               </li>
             ))}
           </ol>

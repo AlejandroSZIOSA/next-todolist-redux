@@ -8,7 +8,9 @@ export const todoListSlice = createSlice({
       state.push(action.payload);
     },
     removeTask: (state, action) => {
-      state = state.filter((item) => item.id !== action.payload.id);
+      const todoId = action.payload;
+      console.log(todoId);
+      state = state.filter((item) => item.id !== todoId);
     },
     setTaskStatus: (state, action) => {
       state.done = action.payload.done;
