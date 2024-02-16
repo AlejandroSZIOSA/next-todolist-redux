@@ -8,8 +8,7 @@ export const todoListSlice = createSlice({
       state.push(action.payload); //works!
     },
     updateTask: (state, action) => {
-      /*   console.log(task); */
-      const updatedItem = action.payload;
+      const updatedItem = action.payload; //problem fixed It!
       const index = state.findIndex((item) => item.id === updatedItem.id);
       if (index !== -1) {
         state[index] = updatedItem;

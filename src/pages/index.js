@@ -7,10 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 //External variables
 var nextIndex = 0;
 
-const test = { hola: "test", cerdo: "test" };
-
 function App() {
-  /* const [todoList, setTodoList] = useState([{ hola: "test" }]); */
   const inputRef = useRef();
 
   const dispatch = useDispatch();
@@ -25,7 +22,13 @@ function App() {
   //works!
   function addTaskTest() {
     inputRef.current.value = ""; //useRef Hook :)
-    dispatch(addTask({ id: nextIndex++, title: taskTitle, isDone: false }));
+
+    //A very nice if else statement :)
+    const isTextInputEmpty = !taskTitle ? true : false;
+    if (!isTextInputEmpty) {
+      dispatch(addTask({ id: nextIndex++, title: taskTitle, isDone: false }));
+      setTaskTitle("");
+    }
   }
 
   //Callback function event with params
@@ -35,8 +38,14 @@ function App() {
   }
 
   function handleDoneTask(task) {
-    /* console.log(task); */
-    let updatedTask = { ...task, isDone: true };
+    let updatedTask; //object changes
+    if (task.isDone) {
+      updatedTask = { ...task, isDone: false };
+    } else {
+      updatedTask = { ...task, isDone: true };
+    }
+
+    /* updatedTask = { ...task, isDone: true }; */
 
     dispatch(updateTask(updatedTask));
   }
