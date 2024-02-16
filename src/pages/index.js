@@ -1,52 +1,48 @@
-import { useRef, useState, useEffect } from "react";
-import TodoItem from "@/components/TodoItem";
-
+import { useRef, useState } from "react";
 import { addTask, removeTask, updateTask } from "@/utils/redux/todolist";
 import { useDispatch, useSelector } from "react-redux";
+import TodoItem from "@/components/TodoItem";
 
 //External variables
 var nextIndex = 0;
 
 function App() {
+  const dispatch = useDispatch(); //REDUX:This allows Actions to the state
+  //REDUX:"todoList" can be replaced It with whatever :) This allows consume(read) the state
+  const todoListRedux = useSelector((state) => state.todoList);
+
   const inputRef = useRef();
-
-  const dispatch = useDispatch();
-  const todoList2 = useSelector((state) => state.todoList);
-
   const [taskTitle, setTaskTitle] = useState("");
 
   function handleTest() {
-    console.log(todoList2);
+    console.log(todoListRedux);
   }
 
   //works!
-  function addTaskTest() {
-    inputRef.current.value = ""; //useRef Hook :)
-
-    //A very nice if else statement :)
+  function handleAddTask() {
+    inputRef.current.value = ""; //Using useRef Hook :)
+    //Controls if "text input" fields is empty!
     const isTextInputEmpty = !taskTitle ? true : false;
     if (!isTextInputEmpty) {
-      dispatch(addTask({ id: nextIndex++, title: taskTitle, isDone: false }));
+      dispatch(addTask({ id: nextIndex++, title: taskTitle, isDone: false })); //REDUX:Add an object to the array
       setTaskTitle("");
     }
   }
 
   //Callback function event with params
   function handleRemoveTask(id) {
-    /* setTodoList(todoList.filter((a) => a.id !== id)); */
-    dispatch(removeTask(id));
+    dispatch(removeTask(id)); //REDUX:Remove an object from the array using the "id"
   }
 
-  function handleDoneTask(task) {
-    let updatedTask; //object changes
+  //Callback function event with params
+  function handleStatusTask(task) {
+    let updatedTask; //Object changes using let
     if (task.isDone) {
       updatedTask = { ...task, isDone: false };
     } else {
       updatedTask = { ...task, isDone: true };
     }
-
-    /* updatedTask = { ...task, isDone: true }; */
-
+    //REDUX:Updating an object by sending the "updated object" to the reducer and then "adding to the array"
     dispatch(updateTask(updatedTask));
   }
 
@@ -55,7 +51,7 @@ function App() {
       <div>
         <h1> TODO - APP</h1>
         <h2>Test</h2>
-        <button onClick={addTaskTest}>Add Task</button>
+        <button onClick={handleAddTask}>Add Task</button>
         <button onClick={handleTest}>Test</button>
 
         <div>
@@ -71,17 +67,17 @@ function App() {
               ref={inputRef}
             ></input>
           </div>
-          <button onClick={addTaskTest}>Add</button>
+          <button onClick={handleAddTask}>Add</button>
         </div>
 
         <div>
           <ol>
-            {todoList2.map((item) => (
+            {todoListRedux.map((item) => (
               <li key={item.id}>
                 <TodoItem
                   task={item}
                   onClickRemoveItemFn={handleRemoveTask}
-                  onClickDoneUndoneFn={handleDoneTask}
+                  onClickUpdateItemFn={handleStatusTask}
                 />
               </li>
             ))}
