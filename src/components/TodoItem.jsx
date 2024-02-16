@@ -23,7 +23,7 @@ export default function TodoItem(props) {
       <div>
         <div>
           <button
-            onClick={() => props.onClickDoneUndoneFn(task)} //Using arrow functions to pass params
+            onClick={() => props.onClickDoneUndoneFn(task, done)} //Using arrow functions to pass params
             style={{
               backgroundColor: btnDoneColor,
             }}

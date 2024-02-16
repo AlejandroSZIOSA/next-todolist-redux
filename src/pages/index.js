@@ -31,13 +31,14 @@ function App() {
   //Callback function event with params
   function handleRemoveTask(id) {
     /* setTodoList(todoList.filter((a) => a.id !== id)); */
-
     dispatch(removeTask(id));
   }
 
   function handleDoneTask(task) {
     /* console.log(task); */
-    dispatch(updateTask(task));
+    let updatedTask = { ...task, isDone: true };
+
+    dispatch(updateTask(updatedTask));
   }
 
   return (
