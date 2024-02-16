@@ -5,19 +5,22 @@ export const todoListSlice = createSlice({
   initialState: [],
   reducers: {
     addTask: (state, action) => {
-      state.push(action.payload);
+      state.push(action.payload); //works!
+    },
+    updateTask: (state, action) => {
+      const task = action.payload;
+      /*   console.log(task); */
+
+      state.map((task) => console.log(task.id, task.title));
     },
     removeTask: (state, action) => {
       const todoId = action.payload;
-      console.log(todoId);
-      state = state.filter((item) => item.id !== todoId);
-    },
-    setTaskStatus: (state, action) => {
-      state.done = action.payload.done;
+      //problem Fixed!
+      return (state = state.filter((item) => item.id !== todoId));
     },
   },
 });
 
-export const { addTask, setTaskStatus, removeTask } = todoListSlice.actions; //destructuring reducers
+export const { addTask, removeTask, updateTask } = todoListSlice.actions; //destructuring reducers
 
 export default todoListSlice.reducer;

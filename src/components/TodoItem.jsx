@@ -5,9 +5,10 @@ let btnDoneColor;
 
 export default function TodoItem(props) {
   //Destructuring Item object :)
+  const task = props.task;
   const title = props.task.title;
   const id = props.task.id;
-  const done = props.task.done;
+  const done = props.task.isDone;
 
   //Change bgColor "button Done UnDone"
   if (done) {
@@ -22,7 +23,7 @@ export default function TodoItem(props) {
       <div>
         <div>
           <button
-            onClick={() => props.onClickDoneUndoneFn(id, done)} //Using arrow functions to pass params
+            onClick={() => props.onClickDoneUndoneFn(task)} //Using arrow functions to pass params
             style={{
               backgroundColor: btnDoneColor,
             }}

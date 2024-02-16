@@ -1,15 +1,16 @@
 import { useRef, useState, useEffect } from "react";
 import TodoItem from "@/components/TodoItem";
 
-import { addTask, removeTask, setTaskStatus } from "@/utils/redux/todolist";
+import { addTask, removeTask, updateTask } from "@/utils/redux/todolist";
 import { useDispatch, useSelector } from "react-redux";
-import { stringify } from "postcss";
 
 //External variables
 var nextIndex = 0;
 
+const test = { hola: "test", cerdo: "test" };
+
 function App() {
-  const [todoList, setTodoList] = useState([]);
+  /* const [todoList, setTodoList] = useState([{ hola: "test" }]); */
   const inputRef = useRef();
 
   const dispatch = useDispatch();
@@ -21,36 +22,22 @@ function App() {
     console.log(todoList2);
   }
 
+  //works!
   function addTaskTest() {
     inputRef.current.value = ""; //useRef Hook :)
-    dispatch(addTask({ id: nextIndex++, title: taskTitle, done: false }));
+    dispatch(addTask({ id: nextIndex++, title: taskTitle, isDone: false }));
   }
 
   //Callback function event with params
-  function handleDoneUndoneData(id, done) {
-    //console.log(id, done);
-    const toDoItems = [...todoList]; //Make a copy of actual "todo list"
-    const modifyItem = toDoItems.find((i) => i.id === id); //Find the "item" that will be modify
-    //Conditional: Set new values
-    if (done) {
-      /* dispatch(setTaskStatus({ done: false })); */
-
-      modifyItem.done = false;
-    } else {
-      /* dispatch(setTaskStatus({ done: true })); */
-      modifyItem.done = true;
-    }
-    //Update the "todo list" state
-    setTodoList(toDoItems);
-  }
-
-  //Callback function event with params
-  function handleRemoveTodoItem(id) {
-    /* This modify the current todo list by excluding the given 
-    "id", then set the new "array object" state (update) */
+  function handleRemoveTask(id) {
     /* setTodoList(todoList.filter((a) => a.id !== id)); */
 
     dispatch(removeTask(id));
+  }
+
+  function handleDoneTask(task) {
+    /* console.log(task); */
+    dispatch(updateTask(task));
   }
 
   return (
@@ -83,8 +70,8 @@ function App() {
               <li key={item.id}>
                 <TodoItem
                   task={item}
-                  onClickRemoveItemFn={handleRemoveTodoItem}
-                  onClickDoneUndoneFn={handleDoneUndoneData}
+                  onClickRemoveItemFn={handleRemoveTask}
+                  onClickDoneUndoneFn={handleDoneTask}
                 />
               </li>
             ))}
