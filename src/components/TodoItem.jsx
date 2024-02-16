@@ -8,10 +8,10 @@ export default function TodoItem(props) {
   const task = props.task;
   const title = props.task.title;
   const id = props.task.id;
-  const done = props.task.isDone;
+  const isDone = props.task.isDone;
 
   //Change bgColor "button Done UnDone"
-  if (done) {
+  if (isDone) {
     btnDoneColor = "green";
   } else {
     btnDoneColor = "orange";
@@ -28,7 +28,7 @@ export default function TodoItem(props) {
               backgroundColor: btnDoneColor,
             }}
           >
-            {done ? "Done" : "unDone"}
+            {isDone ? "Done" : "unDone"}
           </button>
         </div>
         <div>
