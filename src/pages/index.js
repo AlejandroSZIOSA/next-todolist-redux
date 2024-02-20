@@ -14,10 +14,6 @@ function App() {
   const inputRef = useRef();
   const [taskTitle, setTaskTitle] = useState("");
 
-  function handleTest() {
-    console.log(todoListRedux);
-  }
-
   //works!
   function handleAddTask() {
     inputRef.current.value = ""; //Using useRef Hook :)
@@ -47,44 +43,38 @@ function App() {
   }
 
   return (
-    <>
+    <div class="flex flex-col items-center justify-center">
       <div>
         <h1> TODO - APP</h1>
-        <h2>Test</h2>
-        <button onClick={handleAddTask}>Add Task</button>
-        <button onClick={handleTest}>Test</button>
-
         <div>
-          <h2>
+          <label>
             <strong>Title:</strong>
-          </h2>
-          <div>
-            <input
-              type="text"
-              onChange={(e) => setTaskTitle(e.target.value)}
-              size="15"
-              maxLength="17"
-              ref={inputRef}
-            ></input>
-          </div>
+          </label>
+          <input
+            type="text"
+            onChange={(e) => setTaskTitle(e.target.value)}
+            size="15"
+            maxLength="17"
+            ref={inputRef}
+          ></input>
           <button onClick={handleAddTask}>Add</button>
         </div>
-
-        <div>
-          <ol>
-            {todoListRedux.map((item) => (
-              <li key={item.id}>
-                <TodoItem
-                  task={item}
-                  onClickRemoveItemFn={handleRemoveTask}
-                  onClickUpdateItemFn={handleStatusTask}
-                />
-              </li>
-            ))}
-          </ol>
-        </div>
       </div>
-    </>
+
+      <div>
+        <ul>
+          {todoListRedux.map((item) => (
+            <li key={item.id}>
+              <TodoItem
+                task={item}
+                onClickRemoveItemFn={handleRemoveTask}
+                onClickUpdateItemFn={handleStatusTask}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }
 

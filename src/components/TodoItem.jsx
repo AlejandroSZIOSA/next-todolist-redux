@@ -18,9 +18,9 @@ export default function TodoItem(props) {
   }
 
   return (
-    <div>
+    <div class="flex flex-row w-96 h-16 bg-slate-400">
       <div>{title}</div>
-      <div>
+      <div class="flex flex-row">
         <div>
           <button
             onClick={() => props.onClickUpdateItemFn(task)} //Using arrow functions to pass params
