@@ -46,7 +46,7 @@ function App() {
   return (
     <div class="flex flex-col items-center justify-center">
       <div>
-        <h1> TODO - APP</h1>
+        <h1> TODO - APP (REDUX)</h1>
         <div class="flex flex-row gap-3 items-center text-2xl">
           <label>
             <strong>Title:</strong>
