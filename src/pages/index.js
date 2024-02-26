@@ -42,15 +42,17 @@ function App() {
     dispatch(updateTask(updatedTask));
   }
 
+  //class="flex flex-col items-center justify-center"
   return (
     <div class="flex flex-col items-center justify-center">
       <div>
         <h1> TODO - APP</h1>
-        <div>
+        <div class="flex flex-row gap-3 items-center text-2xl">
           <label>
             <strong>Title:</strong>
           </label>
           <input
+            class="h-8 text-2xl"
             type="text"
             onChange={(e) => setTaskTitle(e.target.value)}
             size="15"
@@ -70,6 +72,7 @@ function App() {
                 onClickRemoveItemFn={handleRemoveTask}
                 onClickUpdateItemFn={handleStatusTask}
               />
+              <br />
             </li>
           ))}
         </ul>
