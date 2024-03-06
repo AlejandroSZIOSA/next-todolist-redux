@@ -18,10 +18,10 @@ export default function TodoItem(props) {
   }
 
   return (
-    <div class="flex flex-row w-[600px] py-2 bg-[#E4E4E4] border-2 border-solid border-black rounded item-center justify-between">
-      <div class="text-2xl pl-[10px] italic">{title}</div>
-      <div class="flex flex-row items-center">
-        <div class="p-2">
+    <div className="flex flex-row w-[600px] py-2 bg-[#E4E4E4] border-2 border-solid border-black rounded item-center justify-between">
+      <div className="text-2xl pl-[10px] italic">{title}</div>
+      <div className="flex flex-row items-center">
+        <div className="p-2">
           <button
             onClick={() => props.onClickUpdateItemFn(task)} //Using arrow functions to pass params
             style={{
@@ -31,7 +31,7 @@ export default function TodoItem(props) {
             {isDone ? "Done" : "unDone"}
           </button>
         </div>
-        <div class="p-2">
+        <div className="p-2">
           <button
             onClick={() => props.onClickRemoveItemFn(id)} //Using arrow functions to pass params :)
             style={{ backgroundColor: "red" }}
