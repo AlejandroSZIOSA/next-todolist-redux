@@ -18,12 +18,6 @@
   p {
     @apply text-sm md:text-base;
   }
-  a {
-    @apply text-lg md:text-2xl;
-  }
-  footer {
-    @apply flex h-auto justify-center bg-white;
-  }
   li {
     @apply list-[disclosure-closed];
   }

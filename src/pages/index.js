@@ -3,9 +3,6 @@ import { addTask, removeTask, updateTask } from "@/utils/redux/todolist";
 import { useDispatch, useSelector } from "react-redux";
 import TodoItem from "@/components/TodoItem";
 
-//External variables
-var nextIndex = 0;
-
 function App() {
   const dispatch = useDispatch(); //REDUX:This allows Actions to the state
   //REDUX:"todoList" can be replaced It with whatever :) This allows consume(read) the state
@@ -14,13 +11,24 @@ function App() {
   const inputRef = useRef();
   const [taskTitle, setTaskTitle] = useState("");
 
+  //Generate random numeric ID between 1-1000
+  function generateRandomNumericId() {
+    return Math.floor(Math.random() * (1000 - 1 + 1)) + 1;
+  }
+
   //works!
   function handleAddTask() {
     inputRef.current.value = ""; //Using useRef Hook :)
     //Controls if "text input" fields is empty!
     const isTextInputEmpty = !taskTitle ? true : false;
     if (!isTextInputEmpty) {
-      dispatch(addTask({ id: nextIndex++, title: taskTitle, isDone: false })); //REDUX:Add an object to the array
+      dispatch(
+        addTask({
+          id: generateRandomNumericId().toString(),
+          title: taskTitle,
+          isDone: false,
+        })
+      ); //REDUX:Add an object to the array
       setTaskTitle("");
     }
   }
