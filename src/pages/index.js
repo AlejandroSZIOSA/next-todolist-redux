@@ -76,7 +76,7 @@ function App() {
       <div className="flex justify-center">
         {/*         Scroll view Container :)
          */}
-        <div className="w-[340px] md:w-[450px] h-[690px] md:h-[700px] md:min-h-24 overflow-y-auto border border-gray-300 rounded">
+        <div className="w-[340px] md:w-[450px] h-[660px] md:h-[700px] md:min-h-24 overflow-y-auto border border-gray-300 rounded">
           <ul className="p-[revert]">
             {todoListRedux.map((item) => (
               <li key={item.id}>
@@ -91,7 +91,7 @@ function App() {
           </ul>
         </div>
       </div>
-      <div className="flex justify-center m-5">
+      <div className="flex justify-center m-2">
         <button className="bg-black p-2 text-red-500">Save Todos</button>
       </div>
     </>
