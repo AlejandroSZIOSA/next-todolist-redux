@@ -1,3 +1,30 @@
-/* @tailwind base; */
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-200 flex flex-col min-h-screen;
+  }
+  h1 {
+    @apply text-2xl font-sans font-bold md:text-4xl;
+  }
+  h2 {
+    @apply text-xl font-mono md:text-3xl;
+  }
+  h3 {
+    @apply text-base font-mono md:text-2xl;
+  }
+  p {
+    @apply text-sm md:text-base;
+  }
+  a {
+    @apply text-lg md:text-2xl;
+  }
+  footer {
+    @apply flex h-auto justify-center bg-white;
+  }
+  li {
+    @apply list-[disclosure-closed];
+  }
+}

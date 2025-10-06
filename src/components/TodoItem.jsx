@@ -18,8 +18,8 @@ export default function TodoItem(props) {
   }
 
   return (
-    <div className="flex flex-row w-[600px] py-2 bg-[#E4E4E4] border-2 border-solid border-black rounded item-center justify-between">
-      <div className="text-2xl pl-[10px] italic">{title}</div>
+    <div className="flex flex-row py-1 bg-[#E4E4E4] border-2 border-solid border-black rounded item-center justify-between">
+      <p className="pl-[10px] italic content-center">{title}</p>
       <div className="flex flex-row items-center">
         <div className="p-2">
           <button

@@ -43,39 +43,42 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <div>
-        <h1> TODO - APP (REDUX)</h1>
+    <div className="flex flex-col justify-center">
+      <h1 className="text-center"> TODO - APP </h1>
+      <div className="flex flex-col items-center justify-center gap-5 m-5 md:flex-row">
         <div className="flex flex-row gap-3 items-center text-2xl">
-          <label>
+          <h2>
             <strong>Title:</strong>
-          </label>
+          </h2>
           <input
-            className="h-8 text-2xl"
+            className="h-9 border-2 border-solid border-black rounded "
             type="text"
             onChange={(e) => setTaskTitle(e.target.value)}
             size="15"
-            maxLength="17"
+            maxLength="28"
             ref={inputRef}
           ></input>
-          <button onClick={handleAddTask}>Add</button>
+          <button
+            className="bg-green-300 px-2 border-2 border-solid border-black rounded hover:bg-green-500"
+            onClick={handleAddTask}
+          >
+            add
+          </button>
         </div>
       </div>
 
-      <div>
-        <ul>
-          {todoListRedux.map((item) => (
-            <li key={item.id}>
-              <TodoItem
-                task={item}
-                onClickRemoveItemFn={handleRemoveTask}
-                onClickUpdateItemFn={handleStatusTask}
-              />
-              <br />
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul className=" w-[410px] p-[revert] md:min-w-fit md:mx-auto">
+        {todoListRedux.map((item) => (
+          <li key={item.id}>
+            <TodoItem
+              task={item}
+              onClickRemoveItemFn={handleRemoveTask}
+              onClickUpdateItemFn={handleStatusTask}
+            />
+            <br />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
