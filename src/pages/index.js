@@ -51,43 +51,50 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col justify-center">
+    <>
       <h1 className="text-center"> TODO - APP </h1>
       <div className="flex flex-col items-center justify-center gap-5 m-5 md:flex-row">
-        <div className="flex flex-row gap-3 items-center text-2xl">
+        <div className="flex flex-row gap-2 items-center">
           <h2>
             <strong>Title:</strong>
           </h2>
           <input
-            className="h-9 border-2 border-solid border-black rounded "
+            className="h-9 w-48 border-2 border-solid border-black rounded md:w-44"
             type="text"
             onChange={(e) => setTaskTitle(e.target.value)}
-            size="15"
-            maxLength="28"
+            maxLength="20"
             ref={inputRef}
           ></input>
           <button
-            className="bg-green-300 px-2 border-2 border-solid border-black rounded hover:bg-green-500"
+            className="bg-black text-white p-1 border-2 border-solid border-black rounded"
             onClick={handleAddTask}
           >
-            add
+            Add
           </button>
         </div>
       </div>
-
-      <ul className=" w-[410px] p-[revert] md:min-w-fit md:mx-auto">
-        {todoListRedux.map((item) => (
-          <li key={item.id}>
-            <TodoItem
-              task={item}
-              onClickRemoveItemFn={handleRemoveTask}
-              onClickUpdateItemFn={handleStatusTask}
-            />
-            <br />
-          </li>
-        ))}
-      </ul>
-    </div>
+      <div className="flex justify-center">
+        {/*         Scroll view Container :)
+         */}
+        <div className="w-[340px] md:w-[450px] h-[690px] md:h-[700px] md:min-h-24 overflow-y-auto border border-gray-300 rounded">
+          <ul className="p-[revert]">
+            {todoListRedux.map((item) => (
+              <li key={item.id}>
+                <TodoItem
+                  task={item}
+                  onClickRemoveItemFn={handleRemoveTask}
+                  onClickUpdateItemFn={handleStatusTask}
+                />
+                <br />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <div className="flex justify-center m-5">
+        <button className="bg-black p-2 text-red-500">Save Todos</button>
+      </div>
+    </>
   );
 }
 

@@ -12,31 +12,40 @@ export default function TodoItem(props) {
 
   //Change bgColor "button Done UnDone"
   if (isDone) {
-    btnDoneColor = "green";
+    btnDoneColor = "rgb(134 239 172)"; //Tailwind color "green-300"
   } else {
     btnDoneColor = "orange";
   }
 
   return (
-    <div className="flex flex-row py-1 bg-[#E4E4E4] border-2 border-solid border-black rounded item-center justify-between">
-      <p className="pl-[10px] italic content-center">{title}</p>
+    <div className="flex flex-row bg-white border-2 border-solid border-black rounded item-center justify-between md:py-1">
+      {/*       using dinamymic className Tailwind
+       */}
+      <p
+        className={`pl-2 italic content-center md:pl-3 md:pr-8 ${
+          isDone ? "line-through md:line-through" : "line-none md:line-none"
+        }`}
+      >
+        {title}
+      </p>
       <div className="flex flex-row items-center">
-        <div className="p-2">
+        <div className="md:pr-2">
           <button
             onClick={() => props.onClickUpdateItemFn(task)} //Using arrow functions to pass params
             style={{
               backgroundColor: btnDoneColor,
+              padding: "5px",
             }}
           >
-            {isDone ? "Done" : "unDone"}
+            <p>{isDone ? "Done" : "unDone"}</p>
           </button>
         </div>
         <div className="p-2">
           <button
             onClick={() => props.onClickRemoveItemFn(id)} //Using arrow functions to pass params :)
-            style={{ backgroundColor: "red" }}
+            style={{ backgroundColor: "red", padding: "5px" }}
           >
-            Remove
+            <p>Remove</p>
           </button>
         </div>
       </div>

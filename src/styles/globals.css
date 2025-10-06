@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-gray-200 flex flex-col min-h-screen;
+    @apply bg-gray-200;
   }
   h1 {
     @apply text-2xl font-sans font-bold md:text-4xl;
@@ -19,6 +19,6 @@
     @apply text-sm md:text-base;
   }
   li {
-    @apply list-[disclosure-closed];
+    @apply list-decimal;
   }
 }
