@@ -1,7 +1,13 @@
-import { useRef, useState } from "react";
-import { addTask, removeTask, updateTask } from "@/utils/redux/todolist";
+import { useRef, useState, useEffect } from "react";
+import {
+  addTask,
+  removeTask,
+  updateTask,
+  resetList,
+} from "@/utils/redux/todolist";
 import { useDispatch, useSelector } from "react-redux";
 import TodoItem from "@/components/TodoItem";
+import { loadTodos } from "@/utils/loadTodos";
 
 function App() {
   const dispatch = useDispatch(); //REDUX:This allows Actions to the state
@@ -10,6 +16,13 @@ function App() {
 
   const inputRef = useRef();
   const [taskTitle, setTaskTitle] = useState("");
+  const [isHydrated, setIsHydrated] = useState(false); // Track hydration status
+
+  // Load todos from localStorage only on the client side
+  useEffect(() => {
+    setIsHydrated(true); // Mark as hydrated Fix hydration problem when try lo load data from localstorage
+    loadTodos();
+  }, []);
 
   //Generate random numeric ID between 1-1000
   function generateRandomNumericId() {
@@ -50,9 +63,14 @@ function App() {
     dispatch(updateTask(updatedTask));
   }
 
+  function handleClearTodos() {
+    localStorage.removeItem("todos");
+    dispatch(resetList()); // Reset the Redux state
+  }
+
   return (
     <>
-      <h1 className="text-center"> TODO - APP </h1>
+      <h1 className="p-3 text-center"> TODO - APP </h1>
       <div className="flex flex-col items-center justify-center gap-5 m-5 md:flex-row">
         <div className="flex flex-row gap-2 items-center">
           <h2>
@@ -73,12 +91,13 @@ function App() {
           </button>
         </div>
       </div>
-      <div className="flex justify-center">
-        {/*         Scroll view Container :)
-         */}
-        <div className="w-[340px] md:w-[450px] h-[600px] md:h-[750px] overflow-y-auto border border-gray-300 rounded md:min-h-24">
-          <ul className="p-[revert]">
-            {todoListRedux.map((item) => (
+      {/*         Scroll view Container :)
+       */}
+      <div className="w-[340px] md:w-[450px] h-[600px] md:h-[750px] overflow-y-auto border border-gray-300 rounded md:min-h-24">
+        <ul className="p-[revert]">
+          {/* fix hydrated problem */}
+          {isHydrated &&
+            todoListRedux.map((item) => (
               <li key={item.id}>
                 <TodoItem
                   task={item}
@@ -88,11 +107,15 @@ function App() {
                 <br />
               </li>
             ))}
-          </ul>
-        </div>
+        </ul>
       </div>
       <div className="flex justify-center m-2">
-        <button className="bg-black p-2 text-red-500">Save Todos</button>
+        <button
+          className="bg-black p-2 text-red-500"
+          onClick={handleClearTodos}
+        >
+          Save Todos
+        </button>
       </div>
     </>
   );

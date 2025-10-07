@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-gray-200;
+    @apply bg-gray-200 justify-items-center;
   }
   h1 {
     @apply text-2xl font-sans font-bold md:text-4xl;

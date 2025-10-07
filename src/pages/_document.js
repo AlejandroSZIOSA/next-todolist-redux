@@ -7,7 +7,7 @@ export default function Document() {
       <Head />
       <body>
         <Main className="flex flex-col mx-auto" />
-        <footer className="w-full h-16 mt-24 bg-slate-400 border-t-2 border-solid border-black justify-items-center content-center md:mt-20">
+        <footer className="w-full h-16 mt-24 bg-slate-400 border-t-2 border-solid border-black justify-items-center content-center md:mt-32">
           <div className="flex items-center">
             <span className="pr-4 pl-8 font-sans">Chas</span>
             <Image

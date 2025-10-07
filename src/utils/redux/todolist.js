@@ -19,9 +19,16 @@ export const todoListSlice = createSlice({
       //problem Fixed!
       return (state = state.filter((item) => item.id !== todoId));
     },
+    resetList: (state) => {
+      return [];
+    },
+    setInitialList: (state, action) => {
+      return [...action.payload];
+    },
   },
 });
 
-export const { addTask, removeTask, updateTask } = todoListSlice.actions; //destructuring reducers
+export const { addTask, removeTask, updateTask, resetList, setInitialList } =
+  todoListSlice.actions; //destructuring reducers
 
 export default todoListSlice.reducer;
