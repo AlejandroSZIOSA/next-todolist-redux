@@ -1,6 +1,7 @@
 //1 Redux Toolkit
 import { configureStore } from "@reduxjs/toolkit";
 import todoListReducer from "./todolist";
+
 // Load todos from localStorage
 const loadState = () => {
   try {

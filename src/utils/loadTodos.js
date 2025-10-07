@@ -2,7 +2,7 @@ import { store } from "@/utils/redux/store";
 import { setInitialList } from "@/utils/redux/todolist"; // Ensure this path is correct
 import { useDispatch, useSelector } from "react-redux";
 
-export const loadTodos = () => {
+export const loadSavedTodos = () => {
   const { dispatch } = store; // Access dispatch from the store
   if (typeof window !== "undefined" && window.localStorage) {
     // Check if localStorage is available

@@ -21,4 +21,7 @@
   li {
     @apply list-decimal;
   }
+  span {
+    @apply text-sm md:text-base;
+  }
 }

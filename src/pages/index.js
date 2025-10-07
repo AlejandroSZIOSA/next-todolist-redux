@@ -7,7 +7,13 @@ import {
 } from "@/utils/redux/todolist";
 import { useDispatch, useSelector } from "react-redux";
 import TodoItem from "@/components/TodoItem";
-import { loadTodos } from "@/utils/loadTodos";
+import { loadSavedTodos } from "@/utils/loadTodos"; //localstorage fn
+import Image from "next/image";
+
+//Generate random numeric ID between 1-1000
+function generateRandomNumericId() {
+  return Math.floor(Math.random() * (1000 - 1 + 1)) + 1;
+}
 
 function App() {
   const dispatch = useDispatch(); //REDUX:This allows Actions to the state
@@ -15,19 +21,16 @@ function App() {
   const todoListRedux = useSelector((state) => state.todoList);
 
   const inputRef = useRef();
+  const [isBtnLocked, setIsBtnLocked] = useState(true);
+
   const [taskTitle, setTaskTitle] = useState("");
   const [isHydrated, setIsHydrated] = useState(false); // Track hydration status
 
   // Load todos from localStorage only on the client side
   useEffect(() => {
     setIsHydrated(true); // Mark as hydrated Fix hydration problem when try lo load data from localstorage
-    loadTodos();
+    loadSavedTodos();
   }, []);
-
-  //Generate random numeric ID between 1-1000
-  function generateRandomNumericId() {
-    return Math.floor(Math.random() * (1000 - 1 + 1)) + 1;
-  }
 
   //works!
   function handleAddTask() {
@@ -66,13 +69,18 @@ function App() {
   function handleClearTodos() {
     localStorage.removeItem("todos");
     dispatch(resetList()); // Reset the Redux state
+    setIsBtnLocked(!isBtnLocked);
+  }
+
+  function toggleLockBtn() {
+    setIsBtnLocked(!isBtnLocked);
   }
 
   return (
     <>
       <h1 className="p-3 text-center"> TODO - APP </h1>
-      <div className="flex flex-col items-center justify-center gap-5 m-5 md:flex-row">
-        <div className="flex flex-row gap-2 items-center">
+      <div className="flex flex-col items-center justify-center gap-5 md:flex-row">
+        <div className="flex flex-row gap-2 pt-2 pb-5 items-center md:pt-3 md:pb-6">
           <h2>
             <strong>Title:</strong>
           </h2>
@@ -93,29 +101,48 @@ function App() {
       </div>
       {/*         Scroll view Container :)
        */}
-      <div className="w-[340px] md:w-[450px] h-[600px] md:h-[750px] overflow-y-auto border border-gray-300 rounded md:min-h-24">
+      <div className="w-[340px] md:w-[450px] h-[550px] md:h-[670px] overflow-y-auto border border-gray-300 rounded md:min-h-24">
         <ul className="p-[revert]">
-          {/* fix hydrated problem */}
+          {/* fix hydrated problem in client side */}
           {isHydrated &&
             todoListRedux.map((item) => (
-              <li key={item.id}>
+              <li key={item.id} className="mb-2 md:mb-3">
                 <TodoItem
                   task={item}
                   onClickRemoveItemFn={handleRemoveTask}
                   onClickUpdateItemFn={handleStatusTask}
                 />
-                <br />
               </li>
             ))}
         </ul>
       </div>
-      <div className="flex justify-center m-2">
-        <button
-          className="bg-black p-2 text-red-500"
-          onClick={handleClearTodos}
-        >
-          Save Todos
-        </button>
+      <div className="flex justify-between items-center mt-6 md:mt-8">
+        <div className="ml-8">
+          <button
+            className={`${
+              isBtnLocked ? "opacity-55" : "opacity-100 hover:scale-105"
+            } p-2 bg-black text-red-500 rounded-md`}
+            disabled={isBtnLocked}
+            onClick={handleClearTodos}
+          >
+            <span>Clear All</span>
+          </button>
+        </div>
+        <div className="flex items-center mr-8">
+          <div>
+            <span>Status</span>
+          </div>
+          <div>
+            <Image
+              src={isBtnLocked ? "/lock.svg" : "/unlock.svg"}
+              width={45}
+              height={45}
+              alt="lock icon"
+              onClick={toggleLockBtn}
+              className="ml-2 cursor-pointer"
+            ></Image>
+          </div>
+        </div>
       </div>
     </>
   );
