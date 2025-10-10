@@ -5,9 +5,9 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body>
+      <body className="flex flex-col justify-between items-center min-h-screen">
         <Main className="flex flex-col mx-auto" />
-        <footer className="w-full h-16 mt-32 bg-slate-400 border-t-2 border-solid border-black justify-items-center content-center md:mt-32">
+        <footer className="relative mt-auto w-full h-16 bg-slate-400 justify-items-center content-center md:fixed md:bottom-0 md:mt-32">
           <div className="flex items-center">
             <span className="pr-4 pl-8 font-sans">Chas</span>
             <Image

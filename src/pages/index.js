@@ -54,15 +54,11 @@ function App() {
     dispatch(removeTask(id)); //REDUX:Remove an object from the array using the "id"
   }
 
-  //Callback function event with params
+  //Callback function event with params, Fix problem!
   function handleStatusTask(task) {
-    let updatedTask; //Object changes using let
-    if (task.isDone) {
-      updatedTask = { ...task, isDone: false };
-    } else {
-      updatedTask = { ...task, isDone: true };
-    }
-    //REDUX:Updating an object by sending the "updated object" to the reducer and then "adding to the array"
+    // Toggle the isDone property directly
+    const updatedTask = { ...task, isDone: !task.isDone };
+    // REDUX: Update the task in the state
     dispatch(updateTask(updatedTask));
   }
 
@@ -101,7 +97,7 @@ function App() {
       </div>
       {/*         Scroll view Container :)
        */}
-      <div className="w-[340px] md:w-[450px] h-[550px] md:h-[670px] overflow-y-auto border border-gray-300 rounded md:min-h-24">
+      <div className="w-[350px] h-[460px] md:w-[450px] md:h-[670px] overflow-y-auto border border-gray-300 rounded md:min-h-24">
         <ul className="p-[revert]">
           {/* fix hydrated problem in client side */}
           {isHydrated &&
@@ -116,7 +112,7 @@ function App() {
             ))}
         </ul>
       </div>
-      <div className="flex justify-between items-center mt-6 md:mt-8">
+      <div className="flex justify-between items-center my-6 md:mt-8">
         <div className="ml-8">
           <button
             className={`${
