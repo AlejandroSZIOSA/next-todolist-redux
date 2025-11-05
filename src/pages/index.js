@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import TodoItem from "@/components/TodoItem";
 import { loadSavedTodos } from "@/utils/loadTodos"; //localstorage fn
 import Image from "next/image";
+import { getCurrentDate } from "@/utils/calculate";
 
 //Generate random numeric ID between 1-1000
 function generateRandomNumericId() {
@@ -20,10 +21,16 @@ function App() {
   //REDUX:"todoList" can be replaced It with whatever :) This allows consume(read) the state
   const todoListRedux = useSelector((state) => state.todoList);
 
-  const inputRef = useRef();
+  const inputTitleRef = useRef();
+  const inputDescriptionRef = useRef();
+  const inputDeadLineRef = useRef();
+
   const [isBtnLocked, setIsBtnLocked] = useState(true);
 
   const [taskTitle, setTaskTitle] = useState("");
+  const [taskDescription, setTaskDescription] = useState("");
+  const [taskDeadLine, setTaskDeadLine] = useState("");
+
   const [isHydrated, setIsHydrated] = useState(false); // Track hydration status
 
   // Load todos from localStorage only on the client side
@@ -33,19 +40,25 @@ function App() {
   }, []);
 
   //works!
-  function handleAddTask() {
-    inputRef.current.value = ""; //Using useRef Hook :)
+  function handleAddTask(event) {
+    event.preventDefault(); //Prevent page reload on form submit
+
     //Controls if "text input" fields is empty!
     const isTextInputEmpty = !taskTitle ? true : false;
     if (!isTextInputEmpty) {
-      dispatch(
-        addTask({
-          id: generateRandomNumericId().toString(),
-          title: taskTitle,
-          isDone: false,
-        })
-      ); //REDUX:Add an object to the array
-      setTaskTitle("");
+      const newTodo = {
+        id: generateRandomNumericId().toString(),
+        title: taskTitle,
+        description: taskDescription,
+        createdAt: getCurrentDate(),
+        deadLine: taskDeadLine,
+        isDone: false,
+      };
+      dispatch(addTask(newTodo)); //REDUX:Add an object to the array
+
+      inputTitleRef.current.value = ""; // Clear the title input field
+      inputDescriptionRef.current.value = ""; // Clear the description input field
+      inputDeadLineRef.current.value = ""; // Clear the description input field
     }
   }
 
@@ -77,22 +90,55 @@ function App() {
       <h1 className="p-3 text-center"> TODO - APP </h1>
       <div className="flex flex-col items-center justify-center gap-5 md:flex-row">
         <div className="flex flex-row gap-2 pt-2 pb-5 items-center md:pt-3 md:pb-6">
-          <h2>
-            <strong>Title:</strong>
-          </h2>
-          <input
-            className="h-9 w-48 border-2 border-solid border-black rounded md:w-44"
-            type="text"
-            onChange={(e) => setTaskTitle(e.target.value)}
-            maxLength="20"
-            ref={inputRef}
-          ></input>
-          <button
-            className="bg-black text-white p-1 border-2 border-solid border-black rounded"
-            onClick={handleAddTask}
-          >
-            Add
-          </button>
+          <form onSubmit={handleAddTask} className="flex flex-col gap-3">
+            <div>
+              <label htmlFor="taskTitle" className="block font-bold">
+                Title:
+              </label>
+              <input
+                id="taskTitle"
+                className="h-9 w-48 border-2 border-solid border-black rounded md:w-44"
+                type="text"
+                placeholder="Enter task title"
+                onChange={(e) => setTaskTitle(e.target.value)}
+                ref={inputTitleRef}
+                required
+              />
+            </div>
+
+            <div>
+              <label htmlFor="taskDescription" className="block font-bold">
+                Description:
+              </label>
+              <textarea
+                id="taskDescription"
+                className="w-48 h-20 border-2 border-solid border-black rounded md:w-44"
+                placeholder="Enter task description"
+                onChange={(e) => setTaskDescription(e.target.value)}
+                ref={inputDescriptionRef}
+              ></textarea>
+            </div>
+            <div>
+              <div>
+                <label htmlFor="taskDeadline" className="block font-bold">
+                  DeadLine:
+                </label>
+                <input
+                  type="date"
+                  id="taskDeadline"
+                  onChange={(e) => setTaskDeadLine(e.target.value)}
+                  ref={inputDeadLineRef}
+                  className="h-9 w-48 border-2 border-solid border-black rounded md:w-44"
+                />
+              </div>
+              <button
+                className="bg-black text-white p-1 border-2 border-solid border-black rounded"
+                type="submit"
+              >
+                Add Task
+              </button>
+            </div>
+          </form>
         </div>
       </div>
       {/*         Scroll view Container :)
