@@ -5,3 +5,7 @@ export function getCurrentDate() {
   const day = String(today.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
 }
+
+export function generateRandomNumericId() {
+  return Math.floor(Math.random() * (1000 - 1 + 1)) + 1;
+}

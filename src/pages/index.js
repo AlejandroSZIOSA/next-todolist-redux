@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { removeTask, updateTask, resetList } from "@/utils/redux/todolist";
+import { removeTodo, updateTodo, resetTodoList } from "@/utils/redux/todolist";
 import { useDispatch, useSelector } from "react-redux";
 import TodoItem from "@/components/TodoItem";
 import { loadSavedTodos } from "@/utils/loadTodos"; //localstorage fn
@@ -14,9 +14,7 @@ function App() {
   const todoListRedux = useSelector((state) => state.todoList);
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-
   const [isBtnLocked, setIsBtnLocked] = useState(true);
-
   const [isHydrated, setIsHydrated] = useState(false); // Track hydration status
 
   // Load todos from localStorage only on the client side
@@ -26,21 +24,21 @@ function App() {
   }, []);
 
   //Callback function event with params
-  function handleRemoveTask(id) {
-    dispatch(removeTask(id)); //REDUX:Remove an object from the array using the "id"
+  function handleRemoveTodo(id) {
+    dispatch(removeTodo(id)); //REDUX:Remove an object from the array using the "id"
   }
 
   //Callback function event with params, Fix problem!
-  function handleStatusTask(task) {
+  function handleUpdateTodo(todo) {
     // Toggle the isDone property directly
-    const updatedTask = { ...task, isDone: !task.isDone };
-    // REDUX: Update the task in the state
-    dispatch(updateTask(updatedTask));
+    const updatedTodo = { ...todo, isDone: !todo.isDone };
+    // REDUX: Update the todo in the state
+    dispatch(updateTodo(updatedTodo));
   }
 
   function handleClearTodos() {
     localStorage.removeItem("todos");
-    dispatch(resetList()); // Reset the Redux state
+    dispatch(resetTodoList()); // Reset the Redux state
     setIsBtnLocked(!isBtnLocked);
   }
 
@@ -78,9 +76,9 @@ function App() {
             todoListRedux.map((item) => (
               <li key={item.id} className="mb-2 md:mb-3">
                 <TodoItem
-                  task={item}
-                  onClickRemoveItemFn={handleRemoveTask}
-                  onClickUpdateItemFn={handleStatusTask}
+                  todo={item}
+                  onClickRemoveItemFn={handleRemoveTodo}
+                  onClickUpdateItemFn={handleUpdateTodo}
                 />
               </li>
             ))}
