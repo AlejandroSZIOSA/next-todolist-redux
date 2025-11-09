@@ -21,8 +21,8 @@ export default function DialogFormTodo({ onCancelFn }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+    <div className="fixed inset-0 bg-gray-800 bg-opacity-90 flex items-center justify-center">
+      <div className="bg-white rounded-lg shadow-lg p-6 w-80 max-w-sm sm:max-w-md">
         <form onSubmit={handleAddTodo}>
           <div className="mb-4">
             <label

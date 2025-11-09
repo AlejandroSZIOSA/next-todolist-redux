@@ -7,13 +7,15 @@ import { loadSavedTodos } from "@/utils/loadTodos"; //localstorage fn
 import Image from "next/image";
 
 import DialogFormTodo from "@/components/DialogFormTodo";
+import DialogConfirm from "@/components/DialogConfirm";
 
 function App() {
   const dispatch = useDispatch(); //REDUX:This allows Actions to the state
   //REDUX:"todoList" can be replaced It with whatever :) This allows consume(read) the state
   const todoListRedux = useSelector((state) => state.todoList);
 
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isDialogFormOpen, setIsDialogFormOpen] = useState(false);
+
   const [isBtnLocked, setIsBtnLocked] = useState(true);
   const [isHydrated, setIsHydrated] = useState(false); // Track hydration status
 
@@ -46,12 +48,13 @@ function App() {
     setIsBtnLocked(!isBtnLocked);
   }
 
-  const handleOpenDialog = () => {
-    setIsDialogOpen(true);
+  //Dialog Form functions
+  const handleOpenFormDialog = () => {
+    setIsDialogFormOpen(true);
   };
 
-  const handleCancelDialog = () => {
-    setIsDialogOpen(false);
+  const handleCancelFormDialog = () => {
+    setIsDialogFormOpen(false);
   };
 
   return (
@@ -61,11 +64,13 @@ function App() {
         <div className="flex flex-row gap-2 pt-2 pb-5 items-center md:pt-3 md:pb-6">
           <button
             className="bg-black text-white p-1 border-2 border-solid border-black rounded"
-            onClick={handleOpenDialog}
+            onClick={handleOpenFormDialog}
           >
             Add
           </button>
-          {isDialogOpen && <DialogFormTodo onCancelFn={handleCancelDialog} />}
+          {isDialogFormOpen && (
+            <DialogFormTodo onCancelFn={handleCancelFormDialog} />
+          )}
         </div>
       </div>
 
@@ -77,6 +82,7 @@ function App() {
               <li key={item.id} className="mb-2 md:mb-3">
                 <TodoItem
                   todo={item}
+                  /*   openConfirmDialogFn={handleOpenConfirmDialog} */
                   onClickRemoveItemFn={handleRemoveTodo}
                   onClickUpdateItemFn={handleUpdateTodo}
                 />
@@ -84,6 +90,7 @@ function App() {
             ))}
         </ul>
       </div>
+
       <div className="flex justify-between items-center my-6 md:mt-8">
         <div className="ml-8">
           <button

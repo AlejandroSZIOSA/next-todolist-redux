@@ -1,5 +1,6 @@
-import React from "react";
+import { useState } from "react";
 import AccordionDescription from "./AccordionDescription";
+import DialogConfirm from "./DialogConfirm";
 
 //External variabels
 let btnDoneColor;
@@ -14,6 +15,8 @@ export default function TodoItem(props) {
   const id = props.todo.id;
   const isDone = props.todo.isDone;
 
+  const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
+
   //Change bgColor "button Done UnDone"
   if (isDone) {
     btnDoneColor = "rgb(134 239 172)"; //Tailwind color "green-300"
@@ -21,9 +24,22 @@ export default function TodoItem(props) {
     btnDoneColor = "orange";
   }
 
+  //Dialog Confirm functions
+  const handleOpenConfirmDialog = () => {
+    setIsConfirmDialogOpen(true);
+  };
+
+  const handleCancelConfirmDialog = () => {
+    setIsConfirmDialogOpen(false);
+  };
+
+  const onAcceptConfirm = () => {
+    props.onClickRemoveItemFn(id);
+  };
+
   return (
     <div className="flex flex-col bg-white border-2 border-solid border-black rounded item-center justify-between md:py-1">
-      {/*       using dinamymic className Tailwind
+      {/*       using dynamic className Tailwind
        */}
       <AccordionDescription
         title={title}
@@ -45,11 +61,17 @@ export default function TodoItem(props) {
         </div>
         <div className="p-2">
           <button
-            onClick={() => props.onClickRemoveItemFn(id)} //Using arrow functions to pass params :)
+            onClick={handleOpenConfirmDialog} //Using arrow functions to pass params :)
             style={{ backgroundColor: "red", padding: "5px" }}
           >
             Remove
           </button>
+          {isConfirmDialogOpen && (
+            <DialogConfirm
+              onAcceptFn={onAcceptConfirm}
+              onCancelFn={handleCancelConfirmDialog}
+            />
+          )}
         </div>
       </div>
     </div>
