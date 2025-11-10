@@ -4,10 +4,9 @@ import { removeTodo, updateTodo, resetTodoList } from "@/utils/redux/todolist";
 import { useDispatch, useSelector } from "react-redux";
 import TodoItem from "@/components/TodoItem";
 import { loadSavedTodos } from "@/utils/loadTodos"; //localstorage fn
-import Image from "next/image";
 
 import DialogFormTodo from "@/components/DialogFormTodo";
-import DialogConfirm from "@/components/DialogConfirm";
+import StoragePanel from "@/components/StoragePanel";
 
 function App() {
   const dispatch = useDispatch(); //REDUX:This allows Actions to the state
@@ -59,9 +58,9 @@ function App() {
 
   return (
     <>
-      <h1 className="p-3 text-center"> TODO - APP [JS] </h1>
+      <h1 className="p-2 text-center"> TODO - APP [JS] </h1>
       <div className="flex flex-col items-center justify-center gap-5 md:flex-row">
-        <div className="flex flex-row gap-2 pt-2 pb-5 items-center md:pt-3 md:pb-6">
+        <div className="flex flex-row gap-2 pb-3 items-center md:pt-3 md:pb-6">
           <button
             className="bg-black text-white p-1 border-2 border-solid border-black rounded"
             onClick={handleOpenFormDialog}
@@ -74,7 +73,7 @@ function App() {
         </div>
       </div>
 
-      <div className="w-[350px] h-[460px] md:w-[450px] md:h-[670px] overflow-y-auto border border-gray-300 rounded md:min-h-24">
+      <div className="w-[100vw] h-[78vh] md:w-[450px] md:h-[670px] overflow-y-auto border border-gray-300 rounded md:min-h-24">
         <ul className="p-[revert]">
           {/* fix hydrated problem in client side */}
           {isHydrated &&
@@ -90,35 +89,11 @@ function App() {
             ))}
         </ul>
       </div>
-
-      <div className="flex justify-between items-center my-6 md:mt-8">
-        <div className="ml-8">
-          <button
-            className={`${
-              isBtnLocked ? "opacity-55" : "opacity-100 hover:scale-105"
-            } p-2 bg-black text-red-500 rounded-md`}
-            disabled={isBtnLocked}
-            onClick={handleClearTodos}
-          >
-            <span>Clear All</span>
-          </button>
-        </div>
-        <div className="flex items-center mr-8">
-          <div>
-            <span>Status</span>
-          </div>
-          <div>
-            <Image
-              src={isBtnLocked ? "/lock.svg" : "/unlock.svg"}
-              width={45}
-              height={45}
-              alt="lock icon"
-              onClick={toggleLockBtn}
-              className="ml-2 cursor-pointer"
-            ></Image>
-          </div>
-        </div>
-      </div>
+      <StoragePanel
+        isBtnLocked={isBtnLocked}
+        handleClearTodos={handleClearTodos}
+        toggleLockBtn={toggleLockBtn}
+      />
     </>
   );
 }

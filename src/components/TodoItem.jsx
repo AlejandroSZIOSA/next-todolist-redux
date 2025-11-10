@@ -46,23 +46,33 @@ export default function TodoItem(props) {
         description={description}
         isDone={isDone}
       />
-      <div className="flex flex-row items-center">
-        <div className="flex flex-row md:pr-2">
-          <p>🎈 {deadline}</p>
+      <div className="flex flex-col items-center">
+        <p
+          className={` py-2 ${
+            isDone ? "line-through md:line-through" : "line-none md:line-none"
+          }`}
+          style={{ wordWrap: "break-word" }}
+        >
+          🎈 {deadline}
+        </p>
+        <div className="flex flex-row w-full justify-between">
           <button
             onClick={() => props.onClickUpdateItemFn(todo)} //Using arrow functions to pass params
             style={{
               backgroundColor: btnDoneColor,
-              padding: "5px",
+              padding: "0.4rem",
+              margin: "0 0.5rem 0.5rem 0.5rem",
             }}
           >
             {isDone ? "Done" : "unDone"}
           </button>
-        </div>
-        <div className="p-2">
           <button
             onClick={handleOpenConfirmDialog} //Using arrow functions to pass params :)
-            style={{ backgroundColor: "red", padding: "5px" }}
+            style={{
+              backgroundColor: "red",
+              padding: "0.4rem",
+              margin: "0 0.5rem 0.5rem 0.5rem",
+            }}
           >
             Remove
           </button>

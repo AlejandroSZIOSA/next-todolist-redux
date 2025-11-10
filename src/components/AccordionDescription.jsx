@@ -14,18 +14,18 @@ export default function AccordionDescription({ title, description, isDone }) {
         onClick={toggleAccordion}
       >
         <p
-          className={`pl-2 italic content-center md:pl-3 md:pr-8 ${
+          className={`pl-2 font-bold content-center md:pl-3 md:pr-8 ${
             isDone ? "line-through md:line-through" : "line-none md:line-none"
           }`}
         >
           {title}
         </p>
-        <span>{isOpen ? "-" : "+"}</span>
+        <span className="ml-1 font-bold">{isOpen ? "(-)" : "(+)"}</span>
       </div>
       {isOpen && (
         <div className="p-3 w-full bg-white">
           <p
-            className={`italic ${
+            className={` ${
               isDone ? "line-through md:line-through" : "line-none md:line-none"
             }`}
             style={{ wordWrap: "break-word" }}
