@@ -5,15 +5,15 @@ import DialogConfirm from "./DialogConfirm";
 //External variabels
 let btnDoneColor;
 
-export default function TodoItem(props) {
-  //Destructuring Item object :)
-  const todo = props.todo;
-  const title = props.todo.title;
-  const description = props.todo.description;
-  const deadline = props.todo.deadline;
+const BUTTON_BASE_STYLE = {
+  padding: "0.4rem",
+  borderRadius: "10%",
+};
 
-  const id = props.todo.id;
-  const isDone = props.todo.isDone;
+export default function TodoItem(props) {
+  //Destructuring Todo object
+  const todo = props.todo;
+  const { id, title, description, isDone, deadline } = props.todo;
 
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
 
@@ -59,9 +59,9 @@ export default function TodoItem(props) {
           <button
             onClick={() => props.onClickUpdateItemFn(todo)} //Using arrow functions to pass params
             style={{
+              ...BUTTON_BASE_STYLE,
               backgroundColor: btnDoneColor,
-              padding: "0.4rem",
-              margin: "0 0.5rem 0.5rem 0.5rem",
+              margin: "0 0 1rem 1rem",
             }}
           >
             {isDone ? "Done" : "unDone"}
@@ -69,9 +69,9 @@ export default function TodoItem(props) {
           <button
             onClick={handleOpenConfirmDialog} //Using arrow functions to pass params :)
             style={{
+              ...BUTTON_BASE_STYLE,
               backgroundColor: "red",
-              padding: "0.4rem",
-              margin: "0 0.5rem 0.5rem 0.5rem",
+              margin: "0 1rem 1rem 0",
             }}
           >
             Remove

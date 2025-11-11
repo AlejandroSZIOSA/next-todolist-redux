@@ -21,15 +21,13 @@ export default function StoragePanel({
       </div>
       <div className="flex items-center mr-auto ml-auto">
         <span>Status</span>
-        <div>
+        <div onClick={toggleLockBtn} className="ml-2 cursor-pointer">
           <Image
-            src={isBtnLocked ? "/lock.svg" : "/unlock.svg"}
-            width={45}
-            height={45}
+            src={isBtnLocked ? "/si_lock-fill_red.svg" : "/si_unlock-fill.svg"}
+            width={46}
+            height={46}
             alt="lock icon"
-            onClick={toggleLockBtn}
-            className="ml-2 cursor-pointer"
-          ></Image>
+          />
         </div>
       </div>
     </div>

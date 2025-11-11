@@ -1,11 +1,4 @@
-export function getCurrentDate() {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, "0");
-  const day = String(today.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
-}
+export const getCurrentDate = () => new Date().toISOString().split("T")[0];
 
-export function generateRandomNumericId() {
-  return Math.floor(Math.random() * (1000 - 1 + 1)) + 1;
-}
+export const generateRandomNumericId = () =>
+  Math.floor(Math.random() * (1000 - 1 + 1)) + 1;

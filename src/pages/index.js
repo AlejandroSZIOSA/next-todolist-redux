@@ -58,11 +58,11 @@ function App() {
 
   return (
     <>
-      <h1 className="p-2 text-center"> TODO - APP [JS] </h1>
+      <h1 className="pt-2 text-center"> TODO - APP [JS] </h1>
       <div className="flex flex-col items-center justify-center gap-5 md:flex-row">
-        <div className="flex flex-row gap-2 pb-3 items-center md:pt-3 md:pb-6">
+        <div className="py-3 md:pt-3 md:pb-6">
           <button
-            className="bg-black text-white p-1 border-2 border-solid border-black rounded"
+            className=" py-1 px-4 bg-black text-white border-2 border-solid border-black rounded"
             onClick={handleOpenFormDialog}
           >
             Add
@@ -73,7 +73,7 @@ function App() {
         </div>
       </div>
 
-      <div className="w-[100vw] h-[78vh] md:w-[450px] md:h-[670px] overflow-y-auto border border-gray-300 rounded md:min-h-24">
+      <div className="w-[100vw] h-[79vh] mr-2 md:w-[450px] md:h-[670px] overflow-y-auto border border-gray-300 rounded md:min-h-24">
         <ul className="p-[revert]">
           {/* fix hydrated problem in client side */}
           {isHydrated &&
