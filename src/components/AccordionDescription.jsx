@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function AccordionDescription({ title, description, isDone }) {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function DialogConfirm({ onAcceptFn, onCancelFn }) {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-90 z-50 p-4">
