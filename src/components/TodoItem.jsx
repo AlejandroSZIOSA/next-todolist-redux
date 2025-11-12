@@ -2,16 +2,13 @@ import { useState } from "react";
 import AccordionDescription from "./AccordionDescription";
 import DialogConfirm from "./DialogConfirm";
 
-//External variabels
 let btnDoneColor;
-
 const BUTTON_BASE_STYLE = {
   padding: "0.4rem",
   borderRadius: "10%",
 };
 
 export default function TodoItem(props) {
-  //Destructuring Todo object
   const todo = props.todo;
   const { id, title, description, isDone, deadline } = props.todo;
 
@@ -28,17 +25,15 @@ export default function TodoItem(props) {
   const handleOpenConfirmDialog = () => {
     setIsConfirmDialogOpen(true);
   };
-
   const handleCancelConfirmDialog = () => {
     setIsConfirmDialogOpen(false);
   };
-
   const onAcceptConfirm = () => {
     props.onClickRemoveItemFn(id);
   };
 
   return (
-    <div className="flex flex-col bg-white border-2 border-solid border-black rounded item-center justify-between md:py-1">
+    <div className="flex flex-col bg-white border-2 border-solid border-black rounded item-center justify-between lg:py-1">
       {/*       using dynamic className Tailwind
        */}
       <AccordionDescription
@@ -49,7 +44,7 @@ export default function TodoItem(props) {
       <div className="flex flex-col items-center">
         <p
           className={` py-2 ${
-            isDone ? "line-through md:line-through" : "line-none md:line-none"
+            isDone ? "line-through lg:line-through" : "line-none lg:line-none"
           }`}
           style={{ wordWrap: "break-word" }}
         >

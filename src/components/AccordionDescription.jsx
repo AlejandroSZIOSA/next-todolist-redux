@@ -14,8 +14,8 @@ export default function AccordionDescription({ title, description, isDone }) {
         onClick={toggleAccordion}
       >
         <p
-          className={`pl-2 font-bold content-center md:pl-3 md:pr-8 ${
-            isDone ? "line-through md:line-through" : "line-none md:line-none"
+          className={`pl-2 font-bold content-center lg:pl-3 lg:pr-8 ${
+            isDone ? "line-through lg:line-through" : "line-none lg:line-none"
           }`}
         >
           {title}
@@ -26,7 +26,7 @@ export default function AccordionDescription({ title, description, isDone }) {
         <div className="p-3 w-full bg-white">
           <p
             className={` ${
-              isDone ? "line-through md:line-through" : "line-none md:line-none"
+              isDone ? "line-through lg:line-through" : "line-none lg:line-none"
             }`}
             style={{ wordWrap: "break-word" }}
           >

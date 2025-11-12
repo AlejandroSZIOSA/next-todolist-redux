@@ -59,8 +59,8 @@ function App() {
   return (
     <>
       <h1 className="pt-2 text-center"> TODO - APP [JS] </h1>
-      <div className="flex flex-col items-center justify-center gap-5 md:flex-row">
-        <div className="py-3 md:pt-3 md:pb-6">
+      <div className="flex flex-col items-center justify-center gap-5 lg:flex-row">
+        <div className="py-3 lg:pt-3 lg:pb-6">
           <button
             className=" py-1 px-4 bg-black text-white border-2 border-solid border-black rounded"
             onClick={handleOpenFormDialog}
@@ -73,12 +73,12 @@ function App() {
         </div>
       </div>
 
-      <div className="w-[100vw] h-[79vh] mr-2 md:w-[450px] md:h-[670px] overflow-y-auto border border-gray-300 rounded md:min-h-24">
+      <div className="w-[100vw] h-[79vh] mr-2 lg:w-[450px] lg:h-[670px] overflow-y-auto border border-gray-300 rounded lg:min-h-24">
         <ul className="p-[revert]">
           {/* fix hydrated problem in client side */}
           {isHydrated &&
             todoListRedux.map((item) => (
-              <li key={item.id} className="mb-2 md:mb-3">
+              <li key={item.id} className="mb-2 lg:mb-3">
                 <TodoItem
                   todo={item}
                   /*   openConfirmDialogFn={handleOpenConfirmDialog} */
