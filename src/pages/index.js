@@ -73,7 +73,7 @@ function App() {
         </div>
       </div>
 
-      <div className="w-[100vw] h-[79vh] mr-2 lg:w-[450px] lg:h-[670px] overflow-y-auto border border-gray-300 rounded lg:min-h-24">
+      <div className="w-[100vw] h-[79vh] mr-2 lg:w-[21vw] lg:h-[78vh] overflow-y-auto border border-gray-300 rounded lg:min-h-24">
         <ul className="p-[revert]">
           {/* fix hydrated problem in client side */}
           {isHydrated &&

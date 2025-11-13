@@ -31,6 +31,7 @@ export default function DialogFormTodo({ onCancelFn }) {
             </label>
             <input
               type="text"
+              maxLength={25}
               id="title"
               name="title"
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 lg:text-lg"
@@ -57,7 +58,7 @@ export default function DialogFormTodo({ onCancelFn }) {
               htmlFor="deadline"
               className="block font-bold text-sm lg:text-lg"
             >
-              DeadLine 🎈
+              Deadline 🎈
             </label>
             <input
               id="deadline"
@@ -72,14 +73,14 @@ export default function DialogFormTodo({ onCancelFn }) {
           <div className="flex justify-center space-x-2">
             <button
               type="submit"
-              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-lg"
+              className="w-20 px-4 py-2 bg-black text-white rounded-md hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-lg"
             >
               Add
             </button>
             <button
               type="button"
               onClick={onCancelFn}
-              className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300 lg:text-lg"
+              className="w-20 px-4 py-2 bg-gray-300 text-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-300 lg:text-lg"
             >
               Cancel
             </button>

@@ -1,20 +1,21 @@
 export default function DialogConfirm({ onAcceptFn, onCancelFn }) {
+  const BUTTONS_BASE_STYLE = "";
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-90 z-50 p-4">
-      <div className="p-4 bg-white rounded shadow-md w-full max-w-sm lg:max-w-md">
+      <div className="justify-items-center p-4 bg-white rounded  shadow-md w-60 max-w-sm lg:max-w-md ">
         <h2 className="text-lg font-bold mb-4 text-center">
           Confirm Remove Todo
         </h2>
-        <div className="flex flex-col lg:flex-row justify-end gap-2">
+        <div className="flex flex-row lg:flex-row gap-8">
           <button
             onClick={onAcceptFn}
-            className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 w-full lg:w-auto"
+            className="w-20 px-2 py-2 bg-black text-white rounded lg:w-auto"
           >
             Accept
           </button>
           <button
             onClick={onCancelFn}
-            className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 w-full lg:w-auto"
+            className="w-20 px-2 py-2 bg-gray-300 text-gray-700 rounded lg:w-auto"
           >
             Cancel
           </button>

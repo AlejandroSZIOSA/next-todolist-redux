@@ -6,7 +6,7 @@ export default function StoragePanel({
   toggleLockBtn,
 }) {
   return (
-    <div className="flex flex-row items-center py-2 lg:mt-8">
+    <div className="flex flex-row items-center py-2 lg:mt-4">
       <div className="m-auto">
         <button
           className={`${

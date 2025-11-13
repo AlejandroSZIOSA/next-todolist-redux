@@ -14,7 +14,7 @@ export default function TodoItem(props) {
 
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
 
-  //Change bgColor "button Done UnDone"
+  //Change bgColor Button Done UnDone
   if (isDone) {
     btnDoneColor = "rgb(134 239 172)"; //Tailwind color "green-300"
   } else {
@@ -28,20 +28,18 @@ export default function TodoItem(props) {
   const handleCancelConfirmDialog = () => {
     setIsConfirmDialogOpen(false);
   };
-  const onAcceptConfirm = () => {
+  const onAcceptConfirmDialog = () => {
     props.onClickRemoveItemFn(id);
   };
 
   return (
-    <div className="flex flex-col bg-white border-2 border-solid border-black rounded item-center justify-between lg:py-1">
-      {/*       using dynamic className Tailwind
-       */}
+    <div className="flex flex-col bg-white border-2 border-solid border-black rounded item-center justify-between">
       <AccordionDescription
         title={title}
         description={description}
         isDone={isDone}
       />
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center bg-[#ffe4c4]">
         <p
           className={` py-2 ${
             isDone ? "line-through lg:line-through" : "line-none lg:line-none"
@@ -52,7 +50,7 @@ export default function TodoItem(props) {
         </p>
         <div className="flex flex-row w-full justify-between">
           <button
-            onClick={() => props.onClickUpdateItemFn(todo)} //Using arrow functions to pass params
+            onClick={() => props.onClickUpdateItemFn(todo)} //Using arrow functions passing params
             style={{
               ...BUTTON_BASE_STYLE,
               backgroundColor: btnDoneColor,
@@ -62,7 +60,7 @@ export default function TodoItem(props) {
             {isDone ? "Done" : "unDone"}
           </button>
           <button
-            onClick={handleOpenConfirmDialog} //Using arrow functions to pass params :)
+            onClick={handleOpenConfirmDialog}
             style={{
               ...BUTTON_BASE_STYLE,
               backgroundColor: "red",
@@ -73,7 +71,7 @@ export default function TodoItem(props) {
           </button>
           {isConfirmDialogOpen && (
             <DialogConfirm
-              onAcceptFn={onAcceptConfirm}
+              onAcceptFn={onAcceptConfirmDialog}
               onCancelFn={handleCancelConfirmDialog}
             />
           )}
