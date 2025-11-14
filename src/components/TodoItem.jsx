@@ -3,10 +3,6 @@ import AccordionDescription from "./AccordionDescription";
 import DialogConfirm from "./DialogConfirm";
 
 let btnDoneColor;
-const BUTTON_BASE_STYLE = {
-  padding: "0.4rem",
-  borderRadius: "10%",
-};
 
 export default function TodoItem(props) {
   const todo = props.todo;
@@ -41,7 +37,7 @@ export default function TodoItem(props) {
       />
       <div className="flex flex-col items-center bg-[#ffe4c4]">
         <p
-          className={` py-2 ${
+          className={` pt-1 ${
             isDone ? "line-through lg:line-through" : "line-none lg:line-none"
           }`}
           style={{ wordWrap: "break-word" }}
@@ -51,21 +47,15 @@ export default function TodoItem(props) {
         <div className="flex flex-row w-full justify-between">
           <button
             onClick={() => props.onClickUpdateItemFn(todo)} //Using arrow functions passing params
-            style={{
-              ...BUTTON_BASE_STYLE,
-              backgroundColor: btnDoneColor,
-              margin: "0 0 1rem 1rem",
-            }}
+            className={`w-20 p-2 rounded-md text-black ${
+              isDone ? "bg-green-500" : "bg-orange-400"
+            } mb-2 ml-4`}
           >
             {isDone ? "Done" : "unDone"}
           </button>
           <button
             onClick={handleOpenConfirmDialog}
-            style={{
-              ...BUTTON_BASE_STYLE,
-              backgroundColor: "red",
-              margin: "0 1rem 1rem 0",
-            }}
+            className="w-20 p-2 rounded-md bg-red-600 text-white mb-2 mr-4"
           >
             Remove
           </button>

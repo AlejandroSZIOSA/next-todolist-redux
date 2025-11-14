@@ -1,5 +1,4 @@
 export default function DialogConfirm({ onAcceptFn, onCancelFn }) {
-  const BUTTONS_BASE_STYLE = "";
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-90 z-50 p-4">
       <div className="justify-items-center p-4 bg-white rounded  shadow-md w-60 max-w-sm lg:max-w-md ">
