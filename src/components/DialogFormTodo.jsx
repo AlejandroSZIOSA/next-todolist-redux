@@ -64,7 +64,7 @@ export default function DialogFormTodo({ onCancelFn }) {
               id="deadline"
               name="deadline"
               type="date"
-              /* defaultValue={getCurrentDate()} */
+              defaultValue={getCurrentDate()}
               min={getCurrentDate()}
               className="mt-1 mb-5 flex w-fit border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 lg:text-lg"
               required
@@ -73,7 +73,7 @@ export default function DialogFormTodo({ onCancelFn }) {
           <div className="flex justify-center space-x-2">
             <button
               type="submit"
-              className="w-20 px-4 py-2 bg-black text-white rounded-md hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-lg"
+              className="w-20 px-4 py-2 bg-black text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-lg"
             >
               Add
             </button>

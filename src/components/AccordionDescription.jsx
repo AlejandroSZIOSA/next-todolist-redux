@@ -10,17 +10,23 @@ export default function AccordionDescription({ title, description, isDone }) {
   return (
     <div className="border-b border-black shadow-md">
       <div
-        className="flex justify-center gap-1 items-center py-1 bg-black text-[#00f0f0] cursor-pointer"
+        className="flex justify-center gap-2 lg:gap-1 items-center py-1 bg-black cursor-pointer"
         onClick={toggleAccordion}
       >
         <p
           className={`ml-2 font-bold content-center lg:mr-1 ${
-            isDone ? "line-through decoration-black decoration-1" : "line-none"
+            isDone
+              ? " text-green-400 line-through decoration-black decoration-1"
+              : " text-orange-400 line-none"
           }`}
         >
           {title}
         </p>
-        <span className="font-bold">{isOpen ? "(-)" : "(+)"}</span>
+        {isDone ? (
+          <p className="text-green-400 font-bold">{isOpen ? "(-)" : "(+)"}</p>
+        ) : (
+          <p className="text-orange-400 font-bold">{isOpen ? "(-)" : "(+)"}</p>
+        )}
       </div>
       {isOpen && (
         <div className="p-3 w-full text-center bg-gray-200">
