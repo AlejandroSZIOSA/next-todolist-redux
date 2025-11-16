@@ -8,13 +8,13 @@ export default function DialogConfirm({ onAcceptFn, onCancelFn }) {
         <div className="flex flex-row lg:flex-row gap-8">
           <button
             onClick={onAcceptFn}
-            className="w-20 px-2 py-2 bg-red-600 text-white rounded lg:w-auto"
+            className="w-20 px-2 py-2 bg-red-600 text-white rounded"
           >
             Accept
           </button>
           <button
             onClick={onCancelFn}
-            className="w-20 px-2 py-2 bg-gray-300 text-gray-700 rounded lg:w-auto"
+            className="w-20 px-2 py-2 bg-gray-300 text-gray-700 rounded"
           >
             Cancel
           </button>

@@ -60,7 +60,7 @@ function App() {
     <>
       <h1 className="pt-2 text-center"> TODO - APP [JS] </h1>
       <div className="flex flex-col items-center justify-center gap-5 lg:flex-row">
-        <div className="py-3 lg:pt-3 lg:pb-6">
+        <div className="py-4 lg:py-5">
           <button
             className=" py-1 px-4 bg-black text-white border-2 border-solid border-black rounded"
             onClick={handleOpenFormDialog}
@@ -73,7 +73,7 @@ function App() {
         </div>
       </div>
 
-      <div className="w-[100vw] h-[79vh] mr-2 lg:w-[21vw] lg:h-[78vh] overflow-y-auto border border-gray-300 rounded lg:min-h-24">
+      <div className="w-[100vw] h-[78vh] mr-2 lg:w-[21vw] lg:h-[78vh] overflow-y-auto border border-gray-300 rounded lg:min-h-24">
         <ul className="p-[revert]">
           {/* fix hydrated problem in client side */}
           {isHydrated &&
