@@ -22,12 +22,13 @@ export default function DialogFormTodo({ onCancelFn }) {
     <div className="fixed inset-0 bg-gray-800 bg-opacity-90 flex items-center justify-center">
       <div className="bg-white rounded-lg shadow-lg p-6 w-80 lg:w-96 max-w-sm lg:max-w-lg">
         <form onSubmit={handleAddTodo}>
+          <h2 className="text-lg font-bold text-center">TODO</h2>
           <div className="mb-4">
             <label
               htmlFor="title"
               className="block font-bold text-sm lg:text-lg"
             >
-              Todo Title:
+              Title:
             </label>
             <input
               type="text"
@@ -70,7 +71,7 @@ export default function DialogFormTodo({ onCancelFn }) {
               required
             />
           </div>
-          <div className="flex justify-center space-x-2">
+          <div className="flex w-full justify-around">
             <button
               type="submit"
               className="w-20 px-4 py-2 bg-black text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-lg"
