@@ -8,6 +8,7 @@ import { loadSavedTodos } from "@/utils/loadTodos"; //localstorage fn
 import DialogFormTodo from "@/components/DialogFormTodo";
 import StoragePanel from "@/components/StoragePanel";
 
+import EmptyListScreen from "@/components/EmptyListScreen";
 function App() {
   const dispatch = useDispatch(); //REDUX:This allows Actions to the state
   //REDUX:"todoList" can be replaced It with whatever :) This allows consume(read) the state
@@ -56,8 +57,20 @@ function App() {
     setIsDialogFormOpen(false);
   };
 
+  const renderTodoList = todoListRedux.map((item) => (
+    <ul className="p-[revert]">
+      <li key={item.id} className="mb-2 lg:mb-3">
+        <TodoItem
+          todo={item}
+          onClickRemoveItemFn={handleRemoveTodo}
+          onClickUpdateItemFn={handleUpdateTodo}
+        />
+      </li>
+    </ul>
+  ));
+
   return (
-    <>
+    <main className="flex flex-col mx-auto">
       <h1 className="pt-2 text-center"> TODO - APP [JS] </h1>
       <div className="flex flex-col items-center justify-center gap-5 lg:flex-row">
         <div className="py-4 lg:py-5">
@@ -73,28 +86,21 @@ function App() {
         </div>
       </div>
 
+      {/* fix hydrated problem in client side */}
       <div className="w-[100vw] h-[78vh] mr-2 lg:w-[21vw] lg:h-[78vh] overflow-y-auto border border-gray-300 rounded lg:min-h-24">
-        <ul className="p-[revert]">
-          {/* fix hydrated problem in client side */}
-          {isHydrated &&
-            todoListRedux.map((item) => (
-              <li key={item.id} className="mb-2 lg:mb-3">
-                <TodoItem
-                  todo={item}
-                  /*   openConfirmDialogFn={handleOpenConfirmDialog} */
-                  onClickRemoveItemFn={handleRemoveTodo}
-                  onClickUpdateItemFn={handleUpdateTodo}
-                />
-              </li>
-            ))}
-        </ul>
+        {isHydrated & (todoListRedux.length != 0) ? (
+          renderTodoList
+        ) : (
+          <EmptyListScreen />
+        )}
       </div>
+
       <StoragePanel
         isBtnLocked={isBtnLocked}
         handleClearTodos={handleClearTodos}
         toggleLockBtn={toggleLockBtn}
       />
-    </>
+    </main>
   );
 }
 
