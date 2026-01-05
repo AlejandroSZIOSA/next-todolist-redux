@@ -58,8 +58,8 @@ function App() {
   };
 
   const renderTodoList = todoListRedux.map((item) => (
-    <ul className="p-[revert]">
-      <li key={item.id} className="mb-2 lg:mb-3">
+    <ul key={item.id} className="p-[revert]">
+      <li className="mb-2 lg:mb-3">
         <TodoItem
           todo={item}
           onClickRemoveItemFn={handleRemoveTodo}

@@ -13,7 +13,6 @@ export default function DialogFormTodo({ onCancelFn }) {
     formValues.title = formValues.title.toUpperCase(); // Convert title to uppercase
     formValues.id = generateRandomNumericId();
     formValues.createdAt = getCurrentDate();
-    console.log(formValues);
     dispatch(addTodo(formValues)); //REDUX:Add an object to the array
     onCancelFn();
   };
