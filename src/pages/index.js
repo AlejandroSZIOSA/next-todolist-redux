@@ -57,18 +57,6 @@ function App() {
     setIsDialogFormOpen(false);
   };
 
-  const renderTodoList = todoListRedux.map((item) => (
-    <ul key={item.id} className="p-[revert]">
-      <li className="mb-2 lg:mb-3">
-        <TodoItem
-          todo={item}
-          onClickRemoveItemFn={handleRemoveTodo}
-          onClickUpdateItemFn={handleUpdateTodo}
-        />
-      </li>
-    </ul>
-  ));
-
   return (
     <main className="flex flex-col mx-auto">
       <h1 className="pt-2 text-center"> TODO - APP [JS] </h1>
@@ -85,16 +73,24 @@ function App() {
           )}
         </div>
       </div>
-
       {/* fix hydrated problem in client side */}
       <div className="w-[100vw] h-[78vh] mr-2 lg:w-[21vw] lg:h-[78vh] overflow-y-auto border border-gray-300 rounded lg:min-h-24">
         {isHydrated & (todoListRedux.length != 0) ? (
-          renderTodoList
+          <ul className="p-[revert]">
+            {todoListRedux.map((item) => (
+              <li key={item.id} className="mb-2 lg:mb-3">
+                <TodoItem
+                  todo={item}
+                  onClickRemoveItemFn={handleRemoveTodo}
+                  onClickUpdateItemFn={handleUpdateTodo}
+                />
+              </li>
+            ))}
+          </ul>
         ) : (
           <EmptyListScreen />
         )}
       </div>
-
       <StoragePanel
         isBtnLocked={isBtnLocked}
         handleClearTodos={handleClearTodos}
